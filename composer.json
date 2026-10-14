@@ -68,11 +68,17 @@
         "rector:check": [
             "rector process --dry-run"
         ],
+        "wayfinder:generate": [
+            "@php artisan wayfinder:generate --with-form --no-interaction"
+        ],
         "ci:check": [
             "Composer\\Config::disableProcessTimeout",
-            "npm run check",
-            "npm run types:check",
-            "@test"
+            "@lint:check",
+            "@wayfinder:generate",
+            "npm run lint",
+            "npm run build",
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
         ],
         "types:check": [
             "phpstan analyse"

@@ -82,6 +82,30 @@ The testing database `vetpet_testing` is created automatically on first Postgres
 - `production` — production releases
 - `development` — integration branch for pull requests
 
+## Continuous integration
+
+GitHub Actions workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on pushes and pull requests targeting `production` or `development`:
+
+| Job       | What it runs                                                             |
+| --------- | ------------------------------------------------------------------------ |
+| `quality` | Pint, Larastan (level 6), Rector dry-run, ESLint/Prettier, and `vue-tsc` |
+| `tests`   | PostgreSQL 17 + Redis 7, migrations, `npm run build`, and Pest           |
+
+Local parity:
+
+- `make lint` — same checks as the `quality` job (plus Wayfinder generation)
+- `make test` — build assets and run Pest (SQLite in memory by default; CI uses Postgres)
+- `composer ci:check` — full pipeline when PHP/Node run on the host
+
+### Branch protection (GitHub settings)
+
+On the repository, require these status checks before merging into `production` and `development`:
+
+- **CI / quality**
+- **CI / tests**
+
+Enable “Require branches to be up to date before merging” so both jobs run on the latest commit.
+
 ## License
 
 MIT

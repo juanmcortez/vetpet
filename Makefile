@@ -23,6 +23,7 @@ install: ensure-env build-images ## Install dependencies, app key, and run migra
 	$(DOCKER_COMPOSE) up -d $(CORE_SERVICES)
 	@$(MAKE) wait-db
 	$(DOCKER_COMPOSE) run --rm --no-deps app composer install --no-interaction --prefer-dist
+	$(DOCKER_COMPOSE) run --rm --no-deps app php artisan wayfinder:generate --with-form --no-interaction
 	$(DOCKER_COMPOSE) run --rm --no-deps node npm ci
 	@if ! grep -q '^APP_KEY=base64:' .env; then \
 		$(DOCKER_COMPOSE) run --rm --no-deps app php artisan key:generate --force; \
@@ -46,9 +47,10 @@ test: ## Run the Pest test suite (builds frontend assets first)
 	$(DOCKER_COMPOSE) run --rm --no-deps node npm run build
 	$(DOCKER_COMPOSE) run --rm --no-deps app php artisan test
 
-lint: ## Run PHP and JavaScript linters
+lint: ## Run PHP and JavaScript quality checks (Pint, PHPStan, Rector, ESLint, vue-tsc)
 	$(DOCKER_COMPOSE) run --rm --no-deps app composer lint:check
-	$(DOCKER_COMPOSE) run --rm --no-deps node npm run check
+	$(DOCKER_COMPOSE) run --rm --no-deps app php artisan wayfinder:generate --with-form --no-interaction
+	$(DOCKER_COMPOSE) run --rm --no-deps node npm run lint
 
 shell: ## Open a shell in the app container
 	$(DOCKER_COMPOSE) exec app bash

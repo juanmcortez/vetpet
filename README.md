@@ -30,11 +30,11 @@ make up
 
 ### URLs (local)
 
-| Service | URL |
-| --- | --- |
+| Service                   | URL                              |
+| ------------------------- | -------------------------------- |
 | Application (starter kit) | http://vet.vetpet.localhost:8480 |
-| Mailpit | http://localhost:8025 |
-| Vite (HMR) | http://localhost:5173 |
+| Mailpit                   | http://localhost:8025            |
+| Vite (HMR)                | http://localhost:5173            |
 
 Modern browsers resolve `*.vetpet.localhost` to `127.0.0.1` without editing `/etc/hosts`.
 
@@ -46,26 +46,26 @@ Object storage and search are behind Compose profiles:
 make up-all
 ```
 
-| Service | URL |
-| --- | --- |
-| MinIO API | http://localhost:9000 |
+| Service       | URL                   |
+| ------------- | --------------------- |
+| MinIO API     | http://localhost:9000 |
 | MinIO console | http://localhost:9001 |
-| Meilisearch | http://localhost:7700 |
+| Meilisearch   | http://localhost:7700 |
 
 Default MinIO credentials match `.env.example` (`vetpet` / `vetpetsecret`).
 
 ## Make commands
 
-| Command | Description |
-| --- | --- |
-| `make up` | Bootstrap and start the core stack |
-| `make up-all` | Core stack plus MinIO and Meilisearch |
-| `make down` | Stop all services |
-| `make fresh` | `migrate:fresh --seed` |
-| `make test` | Build frontend assets and run Pest |
-| `make lint` | PHP Pint (check) and frontend `npm run check` |
-| `make shell` | Shell in the `app` container |
-| `make logs s=app` | Follow logs for a service |
+| Command           | Description                                                              |
+| ----------------- | ------------------------------------------------------------------------ |
+| `make up`         | Bootstrap and start the core stack                                       |
+| `make up-all`     | Core stack plus MinIO and Meilisearch                                    |
+| `make down`       | Stop all services                                                        |
+| `make fresh`      | `migrate:fresh --seed`                                                   |
+| `make test`       | Build frontend assets and run Pest                                       |
+| `make lint`       | Pint, Larastan (level 6), Rector dry-run, ESLint/Prettier, and `vue-tsc` |
+| `make shell`      | Shell in the `app` container                                             |
+| `make logs s=app` | Follow logs for a service                                                |
 
 ## Environment
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\ClinicRole;
 use Database\Factories\ClinicMembershipFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -21,12 +22,11 @@ use Illuminate\Support\Carbon;
  * @property-read User $user
  */
 #[Fillable(['clinic_id', 'user_id', 'role'])]
+#[Table(name: 'clinic_memberships')]
 class ClinicMembership extends Pivot
 {
     /** @use HasFactory<ClinicMembershipFactory> */
     use HasFactory;
-
-    protected $table = 'clinic_memberships';
 
     public $incrementing = true;
 

@@ -10,9 +10,9 @@ Guidance for humans and coding agents working on **VETPET Control** (multi-clini
 
 ## Branches and delivery
 
-| Branch        | Use |
-| ------------- | --- |
-| `development` | Integration; open PRs here |
+| Branch        | Use                                                 |
+| ------------- | --------------------------------------------------- |
+| `development` | Integration; open PRs here                          |
 | `production`  | Release branch; merge from `development` when ready |
 
 CI (`.github/workflows/ci.yml`) must pass **CI / quality** and **CI / tests** before merge.

@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Support\Vetpet;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Uri;
@@ -27,6 +28,8 @@ abstract class TestCase extends BaseTestCase
             'HTTP_HOST' => Vetpet::domain('clinic'),
             'SERVER_NAME' => Vetpet::domain('clinic'),
         ]);
+
+        $this->withoutMiddleware(PreventRequestForgery::class);
     }
 
     /**

@@ -30,4 +30,21 @@ return [
         'api' => env('VETPET_API_SUBDOMAIN', 'api'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Localization & regional defaults
+    |--------------------------------------------------------------------------
+    |
+    | Argentina-first defaults with English support for staff and owners.
+    |
+    */
+
+    'supported_locales' => ['en', 'es'],
+
+    'timezone' => env('APP_TIMEZONE', 'America/Argentina/Buenos_Aires'),
+
+    'currency' => env('VETPET_CURRENCY', 'ARS'),
+
+    'currency_locale' => env('VETPET_CURRENCY_LOCALE', 'es_AR'),
+
 ];

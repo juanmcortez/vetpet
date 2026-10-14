@@ -1,5 +1,6 @@
-import { createInertiaApp } from '@inertiajs/vue3';
+import { createInertiaApp, router } from '@inertiajs/vue3';
 import { initializeTheme } from '@/composables/useAppearance';
+import { i18n, syncI18nLocale } from '@/i18n';
 import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
@@ -21,7 +22,14 @@ void createInertiaApp({
                 return AppLayout;
         }
     },
-    withApp: (app) => {
+    withApp: (app, { page }) => {
+        syncI18nLocale(String(page.props.locale ?? 'es'));
+        app.use(i18n);
+
+        router.on('success', (event) => {
+            syncI18nLocale(String(event.detail.page.props.locale ?? 'es'));
+        });
+
         app.directive('focus', {
             mounted: (el: HTMLElement, shouldFocus) => {
                 if (shouldFocus.value !== false) {

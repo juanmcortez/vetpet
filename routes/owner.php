@@ -3,3 +3,5 @@
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'owner/Home')->name('owner.home');
+
+require __DIR__.'/locale.php';

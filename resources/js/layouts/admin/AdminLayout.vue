@@ -8,11 +8,11 @@ defineProps<{
 
 <template>
     <Head :title="title ?? 'Admin console'" />
-    <div
-        class="min-h-screen bg-[#0f172a] text-slate-100"
-    >
+    <div class="min-h-screen bg-[#0f172a] text-slate-100">
         <header class="border-b border-slate-700 px-6 py-4">
-            <p class="text-sm font-medium tracking-wide uppercase text-slate-400">
+            <p
+                class="text-sm font-medium tracking-wide text-slate-400 uppercase"
+            >
                 VETPET Admin
             </p>
         </header>

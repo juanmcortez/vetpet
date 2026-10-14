@@ -30,14 +30,14 @@ make up
 
 ### URLs (local)
 
-| Surface              | URL                                       |
-| -------------------- | ----------------------------------------- |
-| Clinic (staff / EMR) | http://vet.vetpet.localhost:8480          |
-| Owner portal         | http://owner.vetpet.localhost:8480        |
-| Platform admin       | http://admin.vetpet.localhost:8480        |
-| API (+ `/health`)    | http://api.vetpet.localhost:8480/health   |
-| Mailpit              | http://localhost:8025                     |
-| Vite (HMR)           | http://localhost:5173                     |
+| Surface              | URL                                     |
+| -------------------- | --------------------------------------- |
+| Clinic (staff / EMR) | http://vet.vetpet.localhost:8480        |
+| Owner portal         | http://owner.vetpet.localhost:8480      |
+| Platform admin       | http://admin.vetpet.localhost:8480      |
+| API (+ `/health`)    | http://api.vetpet.localhost:8480/health |
+| Mailpit              | http://localhost:8025                   |
+| Vite (HMR)           | http://localhost:5173                   |
 
 Subdomains are configured in `config/vetpet.php` (`VETPET_*` env vars). Set `SESSION_DOMAIN=.vetpet.localhost` so authentication cookies work across surfaces.
 
@@ -81,6 +81,10 @@ Copy `.env.example` to `.env` and adjust if needed. Docker-related variables:
 - `VITE_PORT` — Vite dev server port (default `5173`)
 
 The testing database `vetpet_testing` is created automatically on first Postgres startup.
+
+### Locale, timezone, and currency
+
+Defaults target Argentina (`APP_LOCALE=es`, `APP_TIMEZONE=America/Argentina/Buenos_Aires`, `VETPET_CURRENCY=ARS`). English (`en`) is supported via cookie-backed locale switching (Appearance settings on the clinic surface). Backend strings live in `lang/{locale}/vetpet.php`; frontend copy uses `vue-i18n` under `resources/js/locales/`.
 
 ## Branches
 

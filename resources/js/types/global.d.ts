@@ -27,6 +27,14 @@ declare module '@inertiajs/core' {
                 currency: string;
                 currency_locale: string;
             };
+            vetpet: {
+                surface: string | null;
+                domains: Record<string, string>;
+                links: {
+                    clinic_login: string;
+                    clinic_settings: string;
+                };
+            };
             clinic?: {
                 current: { id: number; name: string; slug: string } | null;
                 available: { id: number; name: string; slug: string }[];

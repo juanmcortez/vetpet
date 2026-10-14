@@ -12,10 +12,9 @@ const user = computed(
 );
 const isPlatformAdmin = computed(() => Boolean(user.value?.is_platform_admin));
 const clinicSettingsUrl = computed(
-    () =>
-        (page.props.vetpet as { links?: { clinic_settings?: string } })?.links
-            ?.clinic_settings ?? '/',
+    () => page.props.vetpet.links.clinic_settings,
 );
+const clinicLoginUrl = computed(() => page.props.vetpet.links.clinic_login);
 </script>
 
 <template>
@@ -49,10 +48,7 @@ const clinicSettingsUrl = computed(
                 {{ t('vetpet.admin.access.sign_in_clinic') }}
             </p>
             <a
-                :href="
-                    (page.props.vetpet as { links?: { clinic_login?: string } })
-                        ?.links?.clinic_login
-                "
+                :href="clinicLoginUrl"
                 class="mt-3 inline-block text-sm font-medium text-sky-400 underline underline-offset-4"
             >
                 {{ t('vetpet.admin.access.clinic_login_link') }}

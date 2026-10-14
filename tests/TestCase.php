@@ -15,6 +15,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        $this->withoutVite();
+
         $reference = parse_url((string) config('app.url')) ?: [];
         $portSuffix = isset($reference['port']) ? ':'.$reference['port'] : '';
         $clinicHost = Vetpet::domain('clinic');

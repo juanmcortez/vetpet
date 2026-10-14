@@ -41,7 +41,7 @@ Wayfinder generates `resources/js/actions`, `routes`, and `wayfinder` — **giti
 ## Architecture notes
 
 - Routes live in `routes/clinic.php`, `owner.php`, `admin.php`, `api_v1.php` (not a single `web.php`).
-- Multi-clinic data starts with `App\Models\Clinic` (`clinics` table: name, slug, optional timezone/currency overrides, `is_active`). Membership and request scoping are later F1 work.
+- Multi-clinic: `Clinic`, `ClinicMembership` (`App\Enums\ClinicRole`), session-backed `App\Support\CurrentClinic` on the clinic surface (`SetCurrentClinic` / `EnsureHasClinic`). Platform admins (`users.is_platform_admin`) manage clinics on the admin subdomain.
 - Fortify auth is bound to the **clinic** subdomain.
 - API health: `GET /health` on the API host; Sanctum for `v1` token routes.
 - Shared Inertia props: `HandleInertiaRequests` (auth, `vetpet`, locale, regional).

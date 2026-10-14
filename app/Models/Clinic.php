@@ -6,6 +6,8 @@ use Database\Factories\ClinicFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -52,5 +54,24 @@ class Clinic extends Model
     public function resolvedCurrency(): string
     {
         return $this->currency ?? (string) config('vetpet.currency');
+    }
+
+    /**
+     * @return BelongsToMany<User, $this, ClinicMembership, 'pivot'>
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'clinic_memberships')
+            ->withPivot(['role'])
+            ->withTimestamps()
+            ->using(ClinicMembership::class);
+    }
+
+    /**
+     * @return HasMany<ClinicMembership, $this>
+     */
+    public function memberships(): HasMany
+    {
+        return $this->hasMany(ClinicMembership::class);
     }
 }

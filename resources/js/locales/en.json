@@ -14,7 +14,23 @@
         },
         "admin": {
             "title": "Platform admin",
-            "description": "Multi-clinic administration will be served from this subdomain."
+            "description": "Multi-clinic administration will be served from this subdomain.",
+            "clinics": {
+                "title": "Clinics",
+                "description": "Create and manage clinic organizations on the platform.",
+                "manage_link": "Manage clinics",
+                "create_heading": "New clinic",
+                "name": "Name",
+                "slug": "Slug",
+                "create_submit": "Create clinic",
+                "activate": "Activate",
+                "deactivate": "Deactivate"
+            }
+        },
+        "clinic": {
+            "switcher_placeholder": "Select clinic",
+            "missing_title": "No clinic assigned",
+            "missing_description": "Your account is not linked to an active clinic yet. Contact your platform administrator."
         }
     }
 }

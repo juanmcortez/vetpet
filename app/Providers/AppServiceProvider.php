@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\CurrentClinic;
 use App\Support\Vetpet;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
@@ -18,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Fortify::ignoreRoutes();
+
+        $this->app->singleton(CurrentClinic::class, fn () => new CurrentClinic);
     }
 
     /**

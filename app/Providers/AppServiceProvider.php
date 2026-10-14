@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\Vetpet;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->configureVetpetDomains();
         $this->configureDefaults();
+    }
+
+    protected function configureVetpetDomains(): void
+    {
+        config([
+            'sanctum.stateful' => array_values(array_unique(array_filter([
+                ...config('sanctum.stateful', []),
+                Vetpet::baseDomain(),
+                Vetpet::domain('owner'),
+                Vetpet::domain('clinic'),
+                Vetpet::domain('admin'),
+                Vetpet::domain('api'),
+            ]))),
+        ]);
     }
 
     /**

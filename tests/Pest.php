@@ -1,5 +1,6 @@
 <?php
 
+use App\Support\Vetpet;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -42,7 +43,7 @@ expect()->extend('toBeOne', fn () => $this->toBe(1));
 |
 */
 
-function something()
+function vetpetUrl(string $surface, string $path = '/'): string
 {
-    // ..
+    return Vetpet::url($surface, $path);
 }

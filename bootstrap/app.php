@@ -2,17 +2,34 @@
 
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
+use App\Support\Vetpet;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
-        health: '/up',
+        then: function (): void {
+            Route::middleware('web')
+                ->domain(Vetpet::domain('clinic'))
+                ->group(base_path('routes/clinic.php'));
+
+            Route::middleware('web')
+                ->domain(Vetpet::domain('owner'))
+                ->group(base_path('routes/owner.php'));
+
+            Route::middleware('web')
+                ->domain(Vetpet::domain('admin'))
+                ->group(base_path('routes/admin.php'));
+
+            Route::middleware('api')
+                ->domain(Vetpet::domain('api'))
+                ->group(base_path('routes/api_v1.php'));
+        },
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
@@ -22,9 +39,11 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
-            fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
+            fn (Request $request) => Vetpet::currentSurface($request) === 'api' || $request->is('api/*') || $request->expectsJson(),
         );
     })->create();

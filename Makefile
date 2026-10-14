@@ -44,7 +44,8 @@ fresh: ## Reset the database and run seeders
 	$(DOCKER_COMPOSE) exec -T app php artisan migrate:fresh --seed --force
 
 test: ## Run the Pest test suite (builds frontend assets first)
-	$(DOCKER_COMPOSE) run --rm --no-deps node npm run build
+	$(DOCKER_COMPOSE) run --rm --no-deps app php artisan wayfinder:generate --with-form --no-interaction
+	$(DOCKER_COMPOSE) run --rm --no-deps node sh -c 'printf "%s\n" "#!/bin/sh" "exit 0" > /tmp/php && chmod +x /tmp/php && PATH=/tmp:$$PATH npm run build'
 	$(DOCKER_COMPOSE) run --rm --no-deps app php artisan test
 
 lint: ## Run PHP and JavaScript quality checks (Pint, PHPStan, Rector, ESLint, vue-tsc)

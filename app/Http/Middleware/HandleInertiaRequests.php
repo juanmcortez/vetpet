@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\Vetpet;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -42,6 +43,10 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'vetpet' => [
+                'surface' => Vetpet::currentSurface($request),
+                'domains' => Vetpet::domainMap(),
+            ],
         ];
     }
 }

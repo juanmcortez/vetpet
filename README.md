@@ -30,11 +30,16 @@ make up
 
 ### URLs (local)
 
-| Service                   | URL                              |
-| ------------------------- | -------------------------------- |
-| Application (starter kit) | http://vet.vetpet.localhost:8480 |
-| Mailpit                   | http://localhost:8025            |
-| Vite (HMR)                | http://localhost:5173            |
+| Surface              | URL                                       |
+| -------------------- | ----------------------------------------- |
+| Clinic (staff / EMR) | http://vet.vetpet.localhost:8480          |
+| Owner portal         | http://owner.vetpet.localhost:8480        |
+| Platform admin       | http://admin.vetpet.localhost:8480        |
+| API (+ `/health`)    | http://api.vetpet.localhost:8480/health   |
+| Mailpit              | http://localhost:8025                     |
+| Vite (HMR)           | http://localhost:5173                     |
+
+Subdomains are configured in `config/vetpet.php` (`VETPET_*` env vars). Set `SESSION_DOMAIN=.vetpet.localhost` so authentication cookies work across surfaces.
 
 Modern browsers resolve `*.vetpet.localhost` to `127.0.0.1` without editing `/etc/hosts`.
 

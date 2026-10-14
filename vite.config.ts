@@ -32,6 +32,19 @@ export default defineConfig({
         }),
     ]),
     server: {
+        host: '0.0.0.0',
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            host: 'localhost',
+            port: Number(process.env.VITE_PORT ?? 5173),
+        },
+        cors: {
+            origin: [
+                /^https?:\/\/([a-z0-9-]+\.)*vetpet\.localhost(:\d+)?$/i,
+                /^https?:\/\/localhost(:\d+)?$/i,
+            ],
+        },
         watch: {
             ignored: [
                 '**/.agents/**',
@@ -40,6 +53,7 @@ export default defineConfig({
                 '**/.junie/**',
                 '**/vendor/**',
             ],
+            usePolling: process.env.CHOKIDAR_USEPOLLING === 'true',
         },
     },
     lint: {

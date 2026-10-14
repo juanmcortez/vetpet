@@ -88,7 +88,7 @@ return [
 
     'prefix' => '',
 
-    'domain' => null,
+    'domain' => env('VETPET_CLINIC_SUBDOMAIN', 'vet').'.'.env('VETPET_BASE_DOMAIN', 'vetpet.localhost'),
 
     /*
     |--------------------------------------------------------------------------

@@ -20,6 +20,13 @@ declare module '@inertiajs/core' {
             name: string;
             auth: Auth;
             sidebarOpen: boolean;
+            locale: string;
+            locales: string[];
+            regional: {
+                timezone: string;
+                currency: string;
+                currency_locale: string;
+            };
             [key: string]: unknown;
         };
     }

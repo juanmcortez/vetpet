@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\Locale;
+use App\Support\Vetpet;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -42,6 +44,17 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'vetpet' => [
+                'surface' => Vetpet::currentSurface($request),
+                'domains' => Vetpet::domainMap(),
+            ],
+            'locale' => app()->getLocale(),
+            'locales' => Locale::supported(),
+            'regional' => [
+                'timezone' => config('vetpet.timezone'),
+                'currency' => config('vetpet.currency'),
+                'currency_locale' => config('vetpet.currency_locale'),
+            ],
         ];
     }
 }

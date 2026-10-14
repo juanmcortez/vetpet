@@ -1,12 +1,52 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     cooldown:
       default-days: 5
     groups:
       github-actions:
         patterns:
-          - "*"
+          - '*'
+
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 5
+    groups:
+      laravel:
+        patterns:
+          - laravel/*
+      php-dev-tools:
+        patterns:
+          - phpstan/*
+          - larastan/*
+          - rector/*
+          - driftingly/*
+          - pestphp/*
+          - nunomaduro/*
+          - fakerphp/*
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 5
+    groups:
+      vite-ecosystem:
+        patterns:
+          - vite*
+          - '@vitejs/*'
+          - '@laravel/vite-plugin*'
+          - laravel-vite-plugin
+          - vite-plus
+      vue-ecosystem:
+        patterns:
+          - vue*
+          - '@vue/*'
+          - '@inertiajs/*'

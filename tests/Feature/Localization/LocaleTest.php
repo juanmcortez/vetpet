@@ -5,7 +5,7 @@ use App\Support\Money;
 use Illuminate\Support\Facades\App;
 
 test('locale middleware applies cookie preference', function () {
-    $response = $this->withCookie('locale', 'en')
+    $response = $this->withUnencryptedCookie('locale', 'en')
         ->get(vetpetUrl('clinic'));
 
     $response->assertOk();

@@ -43,6 +43,15 @@ Subdomains are configured in `config/vetpet.php` (`VETPET_*` env vars). Set `SES
 
 Modern browsers resolve `*.vetpet.localhost` to `127.0.0.1` without editing `/etc/hosts`.
 
+### Demo accounts (after `make fresh` or seed)
+
+| Role                                  | Email                                     | Password   | Where to work                                                            |
+| ------------------------------------- | ----------------------------------------- | ---------- | ------------------------------------------------------------------------ |
+| **Platform admin** (all clinics)      | `test@example.com`                        | `password` | [admin…/clinics](http://admin.vetpet.localhost:8480/clinics)             |
+| **Clinic administrator** (one clinic) | same or any seeded user on `clinica-demo` | `password` | [vet…/settings/clinic](http://vet.vetpet.localhost:8480/settings/clinic) |
+
+Clinic **administrator** (`ClinicRole`) is not the same as **platform admin** (`is_platform_admin`). Sign in on the **vet** subdomain; the session cookie is shared with **admin** when `SESSION_DOMAIN=.vetpet.localhost`.
+
 ### Optional profiles
 
 Object storage and search are behind Compose profiles:

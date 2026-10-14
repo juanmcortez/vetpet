@@ -17,4 +17,10 @@ return [
         'title' => 'Administración de la plataforma',
         'description' => 'La administración multi-clínica se publicará en este subdominio.',
     ],
+    'clinic' => [
+        'team' => [
+            'already_member' => 'Este usuario ya es miembro de la clínica.',
+            'last_administrator' => 'La clínica debe tener al menos un administrador.',
+        ],
+    ],
 ];

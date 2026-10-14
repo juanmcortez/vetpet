@@ -11,3 +11,6 @@ parameters:
         - routes/
 
     level: 6
+
+    ignoreErrors:
+        - message: '#Trait App\\Models\\Concerns\\BelongsToClinic is used zero times#'

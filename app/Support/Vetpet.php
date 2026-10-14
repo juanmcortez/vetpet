@@ -34,13 +34,24 @@ class Vetpet
 
     public static function url(string $surface, string $path = '/'): string
     {
+        return self::publicUrl($surface, $path);
+    }
+
+    /**
+     * Build a surface URL using the port from {@see config('app.url')} when present (local Docker).
+     */
+    public static function publicUrl(string $surface, string $path = '/'): string
+    {
         $path = '/'.ltrim($path, '/');
 
         if ($path === '//') {
             $path = '/';
         }
 
-        return 'http://'.self::domain($surface).$path;
+        $reference = parse_url((string) config('app.url')) ?: [];
+        $port = isset($reference['port']) ? ':'.$reference['port'] : '';
+
+        return 'http://'.self::domain($surface).$port.$path;
     }
 
     public static function surfaceFromHost(string $host): ?string

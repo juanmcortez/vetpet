@@ -30,6 +30,8 @@ declare module '@inertiajs/core' {
             clinic?: {
                 current: { id: number; name: string; slug: string } | null;
                 available: { id: number; name: string; slug: string }[];
+                can_manage_team: boolean;
+                role: string | null;
             } | null;
             [key: string]: unknown;
         };

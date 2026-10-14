@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\ClinicRole;
 use App\Support\CurrentClinic;
 use App\Support\Locale;
 use App\Support\Vetpet;
@@ -48,6 +49,10 @@ class HandleInertiaRequests extends Middleware
             'vetpet' => [
                 'surface' => Vetpet::currentSurface($request),
                 'domains' => Vetpet::domainMap(),
+                'links' => [
+                    'clinic_login' => Vetpet::publicUrl('clinic', '/login'),
+                    'clinic_settings' => Vetpet::publicUrl('clinic', '/settings/clinic'),
+                ],
             ],
             'locale' => app()->getLocale(),
             'locales' => Locale::supported(),
@@ -61,7 +66,12 @@ class HandleInertiaRequests extends Middleware
     }
 
     /**
-     * @return array{current: ?array{id: int, name: string, slug: string}, available: list<array{id: int, name: string, slug: string}>}|null
+     * @return array{
+     *     current: ?array{id: int, name: string, slug: string},
+     *     available: list<array{id: int, name: string, slug: string}>,
+     *     can_manage_team: bool,
+     *     role: ?string
+     * }|null
      */
     protected function clinicContext(Request $request): ?array
     {
@@ -69,6 +79,7 @@ class HandleInertiaRequests extends Middleware
             return null;
         }
 
+        $user = $request->user();
         $current = app(CurrentClinic::class)->get();
 
         $available = $request->user()
@@ -84,6 +95,8 @@ class HandleInertiaRequests extends Middleware
             ->values()
             ->all();
 
+        $role = $current === null ? null : $user->roleInClinic($current);
+
         return [
             'current' => $current === null ? null : [
                 'id' => $current->id,
@@ -91,6 +104,10 @@ class HandleInertiaRequests extends Middleware
                 'slug' => $current->slug,
             ],
             'available' => $available,
+            'can_manage_team' => $current !== null && (
+                $user->isPlatformAdmin() || $role === ClinicRole::Administrator
+            ),
+            'role' => $role?->value,
         ];
     }
 }

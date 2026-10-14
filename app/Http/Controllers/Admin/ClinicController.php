@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ClinicRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreClinicRequest;
 use App\Http\Requests\Admin\UpdateClinicRequest;
@@ -16,9 +17,14 @@ class ClinicController extends Controller
     {
         return Inertia::render('admin/clinics/Index', [
             'clinics' => Clinic::query()
+                ->with(['memberships.user:id,name,email'])
                 ->orderBy('name')
                 ->paginate(20)
                 ->withQueryString(),
+            'roles' => array_map(
+                fn (ClinicRole $role) => $role->value,
+                ClinicRole::cases(),
+            ),
         ]);
     }
 

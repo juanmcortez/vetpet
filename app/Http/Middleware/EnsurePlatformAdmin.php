@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\Vetpet;
 use Closure;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsurePlatformAdmin
@@ -15,10 +17,20 @@ class EnsurePlatformAdmin
     {
         $user = $request->user();
 
-        if ($user === null || ! $user->isPlatformAdmin()) {
+        if ($user === null) {
             abort(403);
         }
 
-        return $next($request);
+        if ($user->isPlatformAdmin()) {
+            return $next($request);
+        }
+
+        if ($request->expectsJson()) {
+            abort(403);
+        }
+
+        return Inertia::render('admin/NotPlatformAdmin', [
+            'clinicSettingsUrl' => Vetpet::publicUrl('clinic', '/settings/clinic'),
+        ])->toResponse($request)->setStatusCode(403);
     }
 }

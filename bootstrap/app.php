@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureClinicAdministrator;
 use App\Http\Middleware\EnsurePlatformAdmin;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -35,6 +36,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
+            'clinic.admin' => EnsureClinicAdministrator::class,
             'platform.admin' => EnsurePlatformAdmin::class,
         ]);
 

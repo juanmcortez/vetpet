@@ -17,4 +17,10 @@ return [
         'title' => 'Platform admin',
         'description' => 'Multi-clinic administration will be served from this subdomain.',
     ],
+    'clinic' => [
+        'team' => [
+            'already_member' => 'This user is already a member of the clinic.',
+            'last_administrator' => 'The clinic must keep at least one administrator.',
+        ],
+    ],
 ];

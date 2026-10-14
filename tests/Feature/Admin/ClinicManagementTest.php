@@ -18,7 +18,8 @@ test('non admin cannot manage clinics', function () {
 
     $this->actingAs($user)
         ->get(vetpetUrl('admin', '/clinics'))
-        ->assertForbidden();
+        ->assertForbidden()
+        ->assertInertia(fn ($page) => $page->component('admin/NotPlatformAdmin'));
 });
 
 test('platform admin can create a clinic', function () {

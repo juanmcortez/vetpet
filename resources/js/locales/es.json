@@ -15,6 +15,14 @@
         "admin": {
             "title": "Administración de la plataforma",
             "description": "La administración multi-clínica se publicará en este subdominio.",
+            "access": {
+                "denied_title": "Se requiere administrador de plataforma",
+                "denied_description": "Tu cuenta es administrador de clínica en el subdominio de staff, no administrador de la plataforma. Administrá el equipo y el perfil de la clínica en Configuración de clínica en el subdominio vet.",
+                "clinic_settings_link": "Abrir configuración de clínica (subdominio vet)",
+                "use_clinic_surface": "Los administradores de clínica gestionan su organización en el subdominio staff (vet), no aquí. Usá la configuración de clínica para equipo y perfil.",
+                "sign_in_clinic": "Iniciá sesión primero en el subdominio staff; la sesión se comparte entre subdominios si SESSION_DOMAIN está configurado.",
+                "clinic_login_link": "Ir al login de staff"
+            },
             "clinics": {
                 "title": "Clínicas",
                 "description": "Creá y administrá las organizaciones clínicas de la plataforma.",
@@ -24,13 +32,41 @@
                 "slug": "Slug",
                 "create_submit": "Crear clínica",
                 "activate": "Activar",
-                "deactivate": "Desactivar"
+                "deactivate": "Desactivar",
+                "edit_heading": "Editar clínica",
+                "timezone": "Zona horaria",
+                "currency": "Moneda",
+                "save": "Guardar cambios",
+                "members_heading": "Miembros",
+                "add_member": "Agregar miembro",
+                "remove_member": "Quitar"
             }
         },
         "clinic": {
             "switcher_placeholder": "Elegir clínica",
             "missing_title": "Sin clínica asignada",
-            "missing_description": "Tu cuenta aún no está vinculada a una clínica activa. Contactá al administrador de la plataforma."
+            "missing_description": "Tu cuenta aún no está vinculada a una clínica activa. Contactá al administrador de la plataforma.",
+            "settings": {
+                "nav": "Clínica",
+                "title": "Configuración de la clínica",
+                "description": "Actualizá el perfil y los valores regionales de la clínica.",
+                "timezone": "Zona horaria",
+                "currency": "Moneda (ISO)",
+                "slug_readonly": "Slug: {slug} (contactá al administrador de la plataforma para cambiarlo)",
+                "save": "Guardar clínica"
+            },
+            "team": {
+                "title": "Equipo",
+                "description": "Sumá colegas y administrá sus roles en esta clínica.",
+                "email": "Email del usuario",
+                "role": "Rol",
+                "add_member": "Agregar miembro",
+                "remove": "Quitar",
+                "roles": {
+                    "administrator": "Administrador",
+                    "staff": "Personal"
+                }
+            }
         }
     }
 }

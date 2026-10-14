@@ -15,6 +15,14 @@
         "admin": {
             "title": "Platform admin",
             "description": "Multi-clinic administration will be served from this subdomain.",
+            "access": {
+                "denied_title": "Platform admin required",
+                "denied_description": "Your account is a clinic administrator on the staff subdomain, not a platform administrator. Manage your clinic team and profile under Clinic settings on the vet subdomain.",
+                "clinic_settings_link": "Open clinic settings (vet subdomain)",
+                "use_clinic_surface": "Clinic administrators manage their organization on the staff (vet) subdomain, not here. Use clinic settings for team and profile.",
+                "sign_in_clinic": "Sign in on the staff subdomain first; your session is shared across subdomains when SESSION_DOMAIN is configured.",
+                "clinic_login_link": "Go to staff login"
+            },
             "clinics": {
                 "title": "Clinics",
                 "description": "Create and manage clinic organizations on the platform.",
@@ -24,13 +32,41 @@
                 "slug": "Slug",
                 "create_submit": "Create clinic",
                 "activate": "Activate",
-                "deactivate": "Deactivate"
+                "deactivate": "Deactivate",
+                "edit_heading": "Edit clinic",
+                "timezone": "Timezone",
+                "currency": "Currency",
+                "save": "Save changes",
+                "members_heading": "Members",
+                "add_member": "Add member",
+                "remove_member": "Remove"
             }
         },
         "clinic": {
             "switcher_placeholder": "Select clinic",
             "missing_title": "No clinic assigned",
-            "missing_description": "Your account is not linked to an active clinic yet. Contact your platform administrator."
+            "missing_description": "Your account is not linked to an active clinic yet. Contact your platform administrator.",
+            "settings": {
+                "nav": "Clinic",
+                "title": "Clinic settings",
+                "description": "Update your clinic profile and regional defaults.",
+                "timezone": "Timezone",
+                "currency": "Currency (ISO)",
+                "slug_readonly": "Slug: {slug} (contact platform admin to change)",
+                "save": "Save clinic"
+            },
+            "team": {
+                "title": "Team",
+                "description": "Add colleagues and manage their roles in this clinic.",
+                "email": "User email",
+                "role": "Role",
+                "add_member": "Add member",
+                "remove": "Remove",
+                "roles": {
+                    "administrator": "Administrator",
+                    "staff": "Staff"
+                }
+            }
         }
     }
 }

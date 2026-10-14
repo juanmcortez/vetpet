@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ClinicRole;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -55,7 +56,24 @@ class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
 
     public function isPlatformAdmin(): bool
     {
-        return $this->is_platform_admin;
+        return (bool) $this->is_platform_admin;
+    }
+
+    public function roleInClinic(Clinic|int $clinic): ?ClinicRole
+    {
+        $clinicId = $clinic instanceof Clinic ? $clinic->id : $clinic;
+
+        /** @var ClinicMembership|null $membership */
+        $membership = $this->clinicMemberships()
+            ->where('clinic_id', $clinicId)
+            ->first();
+
+        return $membership?->role;
+    }
+
+    public function isClinicAdministrator(Clinic $clinic): bool
+    {
+        return $this->roleInClinic($clinic) === ClinicRole::Administrator;
     }
 
     /**

@@ -26,6 +26,8 @@ class ClinicMembership extends Pivot
     /** @use HasFactory<ClinicMembershipFactory> */
     use HasFactory;
 
+    protected $table = 'clinic_memberships';
+
     public $incrementing = true;
 
     /**

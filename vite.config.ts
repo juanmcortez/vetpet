@@ -28,9 +28,8 @@ export default defineConfig({
             },
         }),
         wayfinder({
-            formVariants: true,
-            command:
-                'php artisan wayfinder:generate --with-form --no-interaction && php artisan vetpet:normalize-wayfinder-urls',
+            formVariants: false,
+            command: 'php artisan vetpet:wayfinder-for-vite --no-interaction',
         }),
     ]),
     server: {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\CurrentClinic;
 use App\Support\Locale;
 use App\Support\Vetpet;
 use Illuminate\Http\Request;
@@ -55,6 +56,41 @@ class HandleInertiaRequests extends Middleware
                 'currency' => config('vetpet.currency'),
                 'currency_locale' => config('vetpet.currency_locale'),
             ],
+            'clinic' => fn () => $this->clinicContext($request),
+        ];
+    }
+
+    /**
+     * @return array{current: ?array{id: int, name: string, slug: string}, available: list<array{id: int, name: string, slug: string}>}|null
+     */
+    protected function clinicContext(Request $request): ?array
+    {
+        if (Vetpet::currentSurface($request) !== 'clinic' || $request->user() === null) {
+            return null;
+        }
+
+        $current = app(CurrentClinic::class)->get();
+
+        $available = $request->user()
+            ->clinics()
+            ->where('clinics.is_active', true)
+            ->orderBy('clinics.name')
+            ->get(['clinics.id', 'clinics.name', 'clinics.slug'])
+            ->map(fn ($clinic) => [
+                'id' => $clinic->id,
+                'name' => $clinic->name,
+                'slug' => $clinic->slug,
+            ])
+            ->values()
+            ->all();
+
+        return [
+            'current' => $current === null ? null : [
+                'id' => $current->id,
+                'name' => $current->name,
+                'slug' => $current->slug,
+            ],
+            'available' => $available,
         ];
     }
 }

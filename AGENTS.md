@@ -29,7 +29,7 @@ make test    # build assets + Pest
 
 Inside containers: `make shell`, `make logs s=app`.
 
-Wayfinder generates `resources/js/actions`, `routes`, and `wayfinder` — **gitignored**; `make install` / `make lint` / CI regenerate with `php artisan wayfinder:generate --with-form`.
+Wayfinder generates `resources/js/actions`, `routes`, and `wayfinder` — **gitignored**; `make install` / `make lint` / CI run `composer wayfinder:generate` (includes `vetpet:normalize-wayfinder-urls` on `routes/` only so forms work on non-default ports).
 
 ## Code standards
 
@@ -41,6 +41,7 @@ Wayfinder generates `resources/js/actions`, `routes`, and `wayfinder` — **giti
 ## Architecture notes
 
 - Routes live in `routes/clinic.php`, `owner.php`, `admin.php`, `api_v1.php` (not a single `web.php`).
+- Multi-clinic: `Clinic`, `ClinicMembership` (`App\Enums\ClinicRole`), session-backed `App\Support\CurrentClinic` on the clinic surface (`SetCurrentClinic` / `EnsureHasClinic`). Platform admins (`users.is_platform_admin`) manage clinics on the admin subdomain.
 - Fortify auth is bound to the **clinic** subdomain.
 - API health: `GET /health` on the API host; Sanctum for `v1` token routes.
 - Shared Inertia props: `HandleInertiaRequests` (auth, `vetpet`, locale, regional).

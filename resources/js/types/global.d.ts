@@ -27,6 +27,10 @@ declare module '@inertiajs/core' {
                 currency: string;
                 currency_locale: string;
             };
+            clinic?: {
+                current: { id: number; name: string; slug: string } | null;
+                available: { id: number; name: string; slug: string }[];
+            } | null;
             [key: string]: unknown;
         };
     }

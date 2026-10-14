@@ -11,5 +11,11 @@ const { t } = useI18n();
         <p class="mt-3 text-sm text-slate-300">
             {{ t('vetpet.admin.description') }}
         </p>
+        <a
+            href="/clinics"
+            class="mt-6 inline-block text-sm font-medium text-sky-400 underline underline-offset-4"
+        >
+            {{ t('vetpet.admin.clinics.manage_link') }}
+        </a>
     </AdminLayout>
 </template>

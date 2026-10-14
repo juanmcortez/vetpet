@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Support\CurrentClinic;
 use App\Support\Vetpet;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Laravel\Fortify\Fortify;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        Fortify::ignoreRoutes();
+
+        $this->app->singleton(CurrentClinic::class, fn () => new CurrentClinic);
     }
 
     /**

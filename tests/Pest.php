@@ -1,5 +1,9 @@
 <?php
 
+use App\Enums\ClinicRole;
+use App\Models\Clinic;
+use App\Models\User;
+use App\Support\CurrentClinic;
 use App\Support\Vetpet;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -46,4 +50,21 @@ expect()->extend('toBeOne', fn () => $this->toBe(1));
 function vetpetUrl(string $surface, string $path = '/'): string
 {
     return Vetpet::url($surface, $path);
+}
+
+function createClinicMember(?User $user = null, ?Clinic $clinic = null, ClinicRole $role = ClinicRole::Administrator): User
+{
+    $user ??= User::factory()->create();
+    $clinic ??= Clinic::factory()->create();
+
+    if (! $user->clinics()->where('clinics.id', $clinic->id)->exists()) {
+        $user->clinics()->attach($clinic->id, ['role' => $role->value]);
+    }
+
+    return $user;
+}
+
+function withCurrentClinic(Clinic $clinic): void
+{
+    test()->session([CurrentClinic::SESSION_KEY => $clinic->id]);
 }

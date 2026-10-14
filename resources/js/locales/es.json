@@ -14,7 +14,23 @@
         },
         "admin": {
             "title": "Administración de la plataforma",
-            "description": "La administración multi-clínica se publicará en este subdominio."
+            "description": "La administración multi-clínica se publicará en este subdominio.",
+            "clinics": {
+                "title": "Clínicas",
+                "description": "Creá y administrá las organizaciones clínicas de la plataforma.",
+                "manage_link": "Administrar clínicas",
+                "create_heading": "Nueva clínica",
+                "name": "Nombre",
+                "slug": "Slug",
+                "create_submit": "Crear clínica",
+                "activate": "Activar",
+                "deactivate": "Desactivar"
+            }
+        },
+        "clinic": {
+            "switcher_placeholder": "Elegir clínica",
+            "missing_title": "Sin clínica asignada",
+            "missing_description": "Tu cuenta aún no está vinculada a una clínica activa. Contactá al administrador de la plataforma."
         }
     }
 }

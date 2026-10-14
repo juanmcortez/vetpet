@@ -56,7 +56,7 @@ jobs:
         run: npm ci
 
       - name: Generate Wayfinder types
-        run: php artisan wayfinder:generate --with-form --no-interaction
+        run: composer wayfinder:generate
 
       - name: PHP quality (Pint, Larastan, Rector)
         run: composer lint:check
@@ -137,7 +137,7 @@ jobs:
         run: npm ci
 
       - name: Generate Wayfinder types
-        run: php artisan wayfinder:generate --with-form --no-interaction
+        run: composer wayfinder:generate
 
       - name: Run database migrations
         run: php artisan migrate --force --ansi

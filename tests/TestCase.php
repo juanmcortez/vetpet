@@ -15,7 +15,10 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $clinicUrl = 'http://'.Vetpet::domain('clinic');
+        $reference = parse_url((string) config('app.url')) ?: [];
+        $portSuffix = isset($reference['port']) ? ':'.$reference['port'] : '';
+        $clinicHost = Vetpet::domain('clinic');
+        $clinicUrl = 'http://'.$clinicHost.$portSuffix;
 
         config([
             'app.url' => $clinicUrl,
@@ -25,8 +28,9 @@ abstract class TestCase extends BaseTestCase
         URL::forceRootUrl($clinicUrl);
 
         $this->withServerVariables([
-            'HTTP_HOST' => Vetpet::domain('clinic'),
-            'SERVER_NAME' => Vetpet::domain('clinic'),
+            'HTTP_HOST' => $clinicHost,
+            'SERVER_NAME' => $clinicHost,
+            'SERVER_PORT' => $reference['port'] ?? '80',
         ]);
 
         $this->withoutMiddleware(PreventRequestForgery::class);

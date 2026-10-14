@@ -88,7 +88,9 @@ return [
 
     'prefix' => '',
 
-    'domain' => env('VETPET_CLINIC_SUBDOMAIN', 'vet').'.'.env('VETPET_BASE_DOMAIN', 'vetpet.localhost'),
+    // Loaded from routes/clinic.php (clinic subdomain group). Not set here so Wayfinder
+    // emits path-only URLs and non-default ports (e.g. :8480) work in local Docker.
+    'domain' => null,
 
     /*
     |--------------------------------------------------------------------------

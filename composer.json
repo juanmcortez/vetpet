@@ -70,7 +70,8 @@
             "rector process --dry-run"
         ],
         "wayfinder:generate": [
-            "@php artisan wayfinder:generate --with-form --no-interaction"
+            "@php artisan wayfinder:generate --with-form --no-interaction",
+            "@php artisan vetpet:normalize-wayfinder-urls"
         ],
         "ci:check": [
             "Composer\\Config::disableProcessTimeout",

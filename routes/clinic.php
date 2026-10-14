@@ -10,3 +10,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/settings.php';
 require __DIR__.'/locale.php';
+
+Route::group([
+    'namespace' => 'Laravel\Fortify\Http\Controllers',
+    'prefix' => config('fortify.prefix', ''),
+], function (): void {
+    require base_path('vendor/laravel/fortify/routes/routes.php');
+});

@@ -1,0 +1,54 @@
+name: Feature request
+description: Suggest an enhancement or new capability
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem and the outcome you want. Link planning docs or phase IDs (e.g. F1-*) if known.
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Primary surface
+      options:
+        - Clinic (staff / EMR)
+        - Owner portal
+        - Platform admin
+        - API
+        - Cross-cutting / infrastructure
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / user story
+      placeholder: As a … I need … so that …
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      options:
+        - label: Tests added or updated (Pest)
+        - label: i18n (es/en) for user-visible text
+        - label: Documentation updated (README / AGENTS.md)

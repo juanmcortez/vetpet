@@ -91,6 +91,10 @@ Defaults target Argentina (`APP_LOCALE=es`, `APP_TIMEZONE=America/Argentina/Buen
 - `production` — production releases
 - `development` — integration branch for pull requests
 
+## Contributing
+
+See [AGENTS.md](AGENTS.md) for conventions, architecture notes, and quality gates. Use the GitHub issue and pull request templates when opening work on the repository.
+
 ## Continuous integration
 
 GitHub Actions workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on pushes and pull requests targeting `production` or `development`:

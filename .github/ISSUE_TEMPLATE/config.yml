@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/juanmcortez/vetpet/blob/development/README.md
+    about: Setup, Make commands, CI, and local URLs
+  - name: Agent guide
+    url: https://github.com/juanmcortez/vetpet/blob/development/AGENTS.md
+    about: Conventions for contributors and coding agents
